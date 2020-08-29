@@ -16,3 +16,16 @@ generate_random_int = lambda lower_bound , higher_bound : lower_bound + np.rando
 def go_2d_figure(x,y):
     plt.plot(x,y)
     plt.show()
+def try_to_fct(x , f, default= np.nan):
+    """ Tries to cast"""
+    try:
+        return f(x)
+    except ValueError:
+        return default
+
+def is_float(string):
+    """ True if given string is float else False"""
+    try:
+        return float(string)
+    except ValueError:
+        return False
