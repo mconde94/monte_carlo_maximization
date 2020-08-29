@@ -13,8 +13,8 @@ args = {
 }
 
 def random_vector_generator(radius):
-    theta = np.random.random()*2*np.pi
-    phi = np.random.random()*np.pi
+    theta = fcts.generate_random_number(0,2*np.pi)
+    phi = fcts.generate_random_number(0, np.pi)
     return np.array([radius*np.cos(theta)*np.sin(phi) , radius*np.sin(theta)*np.sin(phi) , radius*np.cos(phi)])
 
 radius = lambda x: np.sqrt(x[0]**2+x[1]**2+x[2]**2)

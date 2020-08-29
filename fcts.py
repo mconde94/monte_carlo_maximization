@@ -11,6 +11,8 @@ def step_selector(old,init_val , step):
 
 generate_random_number = lambda lower_bound , higher_bound : lower_bound + (higher_bound-lower_bound)*np.random.random()
 
+generate_random_int = lambda lower_bound , higher_bound : lower_bound + np.random.randint(higher_bound)
+
 def go_2d_figure(x,y):
     plt.plot(x,y)
     plt.show()
