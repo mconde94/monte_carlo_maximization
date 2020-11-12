@@ -3,7 +3,7 @@ import numpy as np
 from scipy.integrate import odeint
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
-
+import imageio
 
 class DoublePendulum():
 
@@ -22,6 +22,7 @@ class DoublePendulum():
         self.di = int(1 / self.fps / self.dt)
         self.fig = plt.figure(figsize=(8.3333, 6.25), dpi=72)
         self.ax = self.fig.add_subplot(111)
+        self.pic_paths_list = []
 
     def deriv(self,y, t, L1, L2, m1, m2):
         """Return the first derivatives of y = theta1, z1, theta2, z2."""
@@ -108,8 +109,16 @@ class DoublePendulum():
         self.ax.set_ylim(-self.L1-self.L2-self.r, self.L1+self.L2+self.r)
         self.ax.set_aspect('equal', adjustable='box')
         plt.axis('off')
-        plt.savefig('frames/_img{:04d}.png'.format(i//self.di), dpi=72)
+        pic_path = 'frames/_img{:04d}.png'.format(i//self.di)
+        self.pic_paths_list.append(pic_path)
+        plt.savefig(pic_path, dpi=72)
         plt.cla()
+
+    def make_gif(self):
+        images = []
+        for filename in self.pic_paths_list:
+            images.append(imageio.imread(filename))
+        imageio.mimsave('double_pendulum.gif', images)
 
     def run_all(self):
         self.iterate()
@@ -119,6 +128,7 @@ class DoublePendulum():
         for i in range(0, self.t.size, self.di):
             print(i // self.di, '/', self.t.size // self.di)
             self.make_plot(i)
+        self.make_gif()
 
 
 inputs = {'L1':1,
